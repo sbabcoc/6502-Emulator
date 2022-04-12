@@ -1,0 +1,286 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 025BEH 025BFH _TEXT                  CODE
+ 025C0H 025C0H 00000H C_ETEXT                ENDCODE
+ 025C0H 02601H 00042H NULL                   BEGDATA
+ 02602H 0291FH 0031EH _DATA                  DATA
+ 02920H 0292DH 0000EH CDATA                  DATA
+ 0292EH 0292EH 00000H XIFB                   DATA
+ 0292EH 0292EH 00000H XIF                    DATA
+ 0292EH 0292EH 00000H XIFE                   DATA
+ 0292EH 0292EH 00000H XIB                    DATA
+ 0292EH 0292EH 00000H XI                     DATA
+ 0292EH 0292EH 00000H XIE                    DATA
+ 0292EH 0292EH 00000H XPB                    DATA
+ 0292EH 0292FH 00002H XP                     DATA
+ 02930H 02930H 00000H XPE                    DATA
+ 02930H 02930H 00000H XCB                    DATA
+ 02930H 02930H 00000H XC                     DATA
+ 02930H 02930H 00000H XCE                    DATA
+ 02930H 02930H 00000H XCFB                   DATA
+ 02930H 02930H 00000H XCF                    DATA
+ 02930H 02930H 00000H XCFE                   DATA
+ 02930H 0297FH 00050H CONST                  CONST
+ 02980H 02987H 00008H HDR                    MSG
+ 02988H 02A55H 000CEH MSG                    MSG
+ 02A56H 02A57H 00002H PAD                    MSG
+ 02A58H 02A58H 00001H EPAD                   MSG
+ 02A5AH 02A9DH 00044H _BSS                   BSS
+ 02A9EH 02A9EH 00000H XOB                    BSS
+ 02A9EH 02A9EH 00000H XO                     BSS
+ 02A9EH 02A9EH 00000H XOE                    BSS
+ 02AA0H 02E9FH 00400H c_common               BSS
+ 02EA0H 0369FH 00800H STACK                  STACK
+
+ Origin   Group
+ 025C:0   DGROUP
+
+  Address         Publics by Name
+
+ 025C:00EC       STKHQQ
+ 0000:2376       _brkctl
+ 025C:049A       _edata
+ 025C:08E0       _end
+ 025C:00DA       _environ
+ 025C:00B3       _errno
+ 0000:041E       _exit
+ 0000:0C10       _fflush
+ 0000:0806       _flushall
+ 0000:0838       _fopen
+ 0000:21BC       _free
+ 0000:0862       _fscanf
+ 0000:248C       _isatty
+ 0000:1D88       _lseek
+ 0000:0010       _main
+ 0000:21CE       _malloc
+ 0000:2506       _memset
+ 0000:1E02       _open
+ 0000:1FA6       _read
+ 0000:0220       _SBC_10
+ 0000:24B0       _sprintf
+ 0000:21AA       _stackavail
+ 0000:243A       _strcmp
+ 0000:2466       _strlen
+ 0000:2482       _ultoa
+ 0000:1D20       _ungetc
+ 0000:2082       _write
+ 025C:0098       __abrkp
+ 025C:0048       __abrktb
+ 025C:0098       __abrktbe
+ 025C:009A       __acfinfo
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 025C:00EA       __adbgmsg
+ 025C:0046       __aexit_rtn
+ 025C:00A7       __aintdiv
+ 0000:2217       __amalloc
+ 0000:2356       __amallocbrk
+ 025C:0248       __amblksiz
+ 0000:22FA       __amexpand
+ 0000:2334       __amlink
+ 0000:034A       __amsg_exit
+ 0000:25A0       __aNFblshl
+ 0000:2594       __aNlshl
+ 0000:25A0       __aNNalshl
+ 025C:0242       __aseg1
+ 025C:0238       __asegds
+ 025C:024A       __asegh
+ 025C:0244       __asegn
+ 025C:0246       __asegr
+ 025C:0042       __asizds
+ 025C:025C       __asizeC
+ 025C:025D       __asizeD
+ 0000:02A6       __astart
+ 025C:0044       __atopsp
+ 025C:06E0       __bufin
+ 025C:04E0       __bufout
+ 025C:024E       __cfltcvt_tab
+ 025C:0104       __cflush
+ 025C:00E2       __child
+ 0000:04F0       __chkstk
+ 0000:035A       __cinit
+ 0000:033B       __cintDIV
+ 0000:2534       __cltoasub
+ 0000:1E0A       __copensub
+ 0000:047A       __ctermsub
+ 025C:025E       __ctype
+ 025C:025E       __ctype_
+ 0000:1F95       __cXENIXtoDOSmode
+ 0000:2540       __cxtoa
+ 025C:00BE       __doserrno
+ 0000:07B2       __dosret0
+ 0000:07C5       __dosretax
+ 0000:07BA       __dosreturn
+ 025C:00BB       __dosvermajor
+ 025C:00BC       __dosverminor
+ 0000:0435       __exit
+ 025C:00AB       __fac
+ 0000:04CA       __FF_MSGBANNER
+ 0000:0880       __filbuf
+ 0000:0986       __flsbuf
+ 025C:0236       __fmode
+ 025C:0362       __fpinit
+ 0000:04EA       __fptrap
+ 0000:0922       __getbuf
+ 0000:1CE4       __getstream
+ 0000:0C78       __input
+ 025C:00E5       __intno
+ 025C:0106       __iob
+ 025C:01A6       __iob2
+ 025C:0236       __iomode
+ 025C:021E       __lastiob
+ 0000:07D2       __maperror
+ 0000:0770       __myalloc
+ 025C:00C0       __nfile
+ 0000:21BC       __nfree
+ 0000:21CE       __nmalloc
+ 0000:071C       __NMSG_TEXT
+ 0000:0747       __NMSG_WRITE
+ 0000:0506       __nullcheck
+ 0000:0B1C       __openfile
+ 025C:00BE       __oserr
+ 025C:00C2       __osfile
+ 025C:00BB       __osmajor
+ 025C:00BC       __osminor
+ 025C:00BD       __osmode
+ 025C:00BB       __osversion
+ 0000:14A0       __output
+ 025C:00E4       __ovlflag
+ 025C:00E6       __ovlvec
+ 025C:00DC       __pgmptr
+ 025C:00B9       __psp
+ 025C:00B7       __pspadr
+ 025C:024A       __QChdata
+ 0000:0528       __setargv
+ 0000:06B6       __setenvp
+ 025C:025A       __sigintoff
+ 025C:0258       __sigintseg
+ 025C:00B5       __umaskval
+ 025C:00D6       ___argc
+ 025C:00D8       ___argv
+
+  Address         Publics by Value
+
+ 0000:0010       _main
+ 0000:0220       _SBC_10
+ 0000:02A6       __astart
+ 0000:033B       __cintDIV
+ 0000:034A       __amsg_exit
+ 0000:035A       __cinit
+ 0000:041E       _exit
+ 0000:0435       __exit
+ 0000:047A       __ctermsub
+ 0000:04CA       __FF_MSGBANNER
+ 0000:04EA       __fptrap
+ 0000:04F0       __chkstk
+ 0000:0506       __nullcheck
+ 0000:0528       __setargv
+ 0000:06B6       __setenvp
+ 0000:071C       __NMSG_TEXT
+ 0000:0747       __NMSG_WRITE
+ 0000:0770       __myalloc
+ 0000:07B2       __dosret0
+ 0000:07BA       __dosreturn
+ 0000:07C5       __dosretax
+ 0000:07D2       __maperror
+ 0000:0806       _flushall
+ 0000:0838       _fopen
+ 0000:0862       _fscanf
+ 0000:0880       __filbuf
+ 0000:0922       __getbuf
+ 0000:0986       __flsbuf
+ 0000:0B1C       __openfile
+ 0000:0C10       _fflush
+ 0000:0C78       __input
+ 0000:14A0       __output
+ 0000:1CE4       __getstream
+ 0000:1D20       _ungetc
+ 0000:1D88       _lseek
+ 0000:1E02       _open
+ 0000:1E0A       __copensub
+ 0000:1F95       __cXENIXtoDOSmode
+ 0000:1FA6       _read
+ 0000:2082       _write
+ 0000:21AA       _stackavail
+ 0000:21BC       __nfree
+ 0000:21BC       _free
+ 0000:21CE       __nmalloc
+ 0000:21CE       _malloc
+ 0000:2217       __amalloc
+ 0000:22FA       __amexpand
+ 0000:2334       __amlink
+ 0000:2356       __amallocbrk
+ 0000:2376       _brkctl
+ 0000:243A       _strcmp
+ 0000:2466       _strlen
+ 0000:2482       _ultoa
+ 0000:248C       _isatty
+ 0000:24B0       _sprintf
+ 0000:2506       _memset
+ 0000:2534       __cltoasub
+ 0000:2540       __cxtoa
+ 0000:2594       __aNlshl
+ 0000:25A0       __aNNalshl
+ 0000:25A0       __aNFblshl
+ 025C:0042       __asizds
+ 025C:0044       __atopsp
+ 025C:0046       __aexit_rtn
+ 025C:0048       __abrktb
+ 025C:0098       __abrktbe
+ 025C:0098       __abrkp
+ 025C:009A       __acfinfo
+ 025C:00A7       __aintdiv
+ 025C:00AB       __fac
+ 025C:00B3       _errno
+ 025C:00B5       __umaskval
+ 025C:00B7       __pspadr
+ 025C:00B9       __psp
+ 025C:00BB       __osversion
+ 025C:00BB       __osmajor
+ 025C:00BB       __dosvermajor
+ 025C:00BC       __dosverminor
+ 025C:00BC       __osminor
+ 025C:00BD       __osmode
+ 025C:00BE       __doserrno
+ 025C:00BE       __oserr
+ 025C:00C0       __nfile
+ 025C:00C2       __osfile
+ 025C:00D6       ___argc
+ 025C:00D8       ___argv
+ 025C:00DA       _environ
+ 025C:00DC       __pgmptr
+ 025C:00E2       __child
+ 025C:00E4       __ovlflag
+ 025C:00E5       __intno
+ 025C:00E6       __ovlvec
+ 025C:00EA       __adbgmsg
+ 025C:00EC       STKHQQ
+ 025C:0104       __cflush
+ 025C:0106       __iob
+ 025C:01A6       __iob2
+ 025C:021E       __lastiob
+ 025C:0236       __fmode
+ 025C:0236       __iomode
+ 025C:0238       __asegds
+ 025C:0242       __aseg1
+ 025C:0244       __asegn
+ 025C:0246       __asegr
+ 025C:0248       __amblksiz
+ 025C:024A       __QChdata
+ 025C:024A       __asegh
+ 025C:024E       __cfltcvt_tab
+ 025C:0258       __sigintseg
+ 025C:025A       __sigintoff
+ 025C:025C       __asizeC
+ 025C:025D       __asizeD
+ 025C:025E       __ctype_
+ 025C:025E       __ctype
+ 025C:0362       __fpinit
+ 025C:049A       _edata
+ 025C:04E0       __bufout
+ 025C:06E0       __bufin
+ 025C:08E0       _end
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+
+Program entry point at 0000:02A6

@@ -1,0 +1,250 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 0192CH 0192DH _TEXT                  CODE
+ 0192EH 0192EH 00000H C_ETEXT                ENDCODE
+ 01930H 01971H 00042H NULL                   BEGDATA
+ 01972H 01B89H 00218H _DATA                  DATA
+ 01B8AH 01B97H 0000EH CDATA                  DATA
+ 01B98H 01B98H 00000H XIFB                   DATA
+ 01B98H 01B98H 00000H XIF                    DATA
+ 01B98H 01B98H 00000H XIFE                   DATA
+ 01B98H 01B98H 00000H XIB                    DATA
+ 01B98H 01B98H 00000H XI                     DATA
+ 01B98H 01B98H 00000H XIE                    DATA
+ 01B98H 01B98H 00000H XPB                    DATA
+ 01B98H 01B99H 00002H XP                     DATA
+ 01B9AH 01B9AH 00000H XPE                    DATA
+ 01B9AH 01B9AH 00000H XCB                    DATA
+ 01B9AH 01B9AH 00000H XC                     DATA
+ 01B9AH 01B9AH 00000H XCE                    DATA
+ 01B9AH 01B9AH 00000H XCFB                   DATA
+ 01B9AH 01B9AH 00000H XCF                    DATA
+ 01B9AH 01B9AH 00000H XCFE                   DATA
+ 01B9AH 01C35H 0009CH CONST                  CONST
+ 01C36H 01C3DH 00008H HDR                    MSG
+ 01C3EH 01D0BH 000CEH MSG                    MSG
+ 01D0CH 01D0DH 00002H PAD                    MSG
+ 01D0EH 01D0EH 00001H EPAD                   MSG
+ 01D10H 01D35H 00026H _BSS                   BSS
+ 01D36H 01D36H 00000H XOB                    BSS
+ 01D36H 01D36H 00000H XO                     BSS
+ 01D36H 01D36H 00000H XOE                    BSS
+ 01D40H 0213FH 00400H c_common               BSS
+ 02140H 0293FH 00800H STACK                  STACK
+
+ Origin   Group
+ 0193:0   DGROUP
+
+  Address         Publics by Name
+
+ 0193:00EC       STKHQQ
+ 0000:022C       _ADC_10
+ 0000:178E       _brkctl
+ 0193:03E0       _edata
+ 0193:0810       _end
+ 0193:00DA       _environ
+ 0193:00B3       _errno
+ 0000:044C       _exit
+ 0000:0B74       _fflush
+ 0000:0834       _flushall
+ 0000:15D4       _free
+ 0000:18AA       _isatty
+ 0000:1420       _lseek
+ 0000:0010       _main
+ 0000:15E6       _malloc
+ 0000:0866       _printf
+ 0000:15C2       _stackavail
+ 0000:1852       _strcpy
+ 0000:1884       _strlen
+ 0000:18A0       _ultoa
+ 0000:149A       _write
+ 0193:0098       __abrkp
+ 0193:0048       __abrktb
+ 0193:0098       __abrktbe
+ 0193:009A       __acfinfo
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0193:00EA       __adbgmsg
+ 0193:0046       __aexit_rtn
+ 0193:00A7       __aintdiv
+ 0000:162F       __amalloc
+ 0000:176E       __amallocbrk
+ 0193:0244       __amblksiz
+ 0000:1712       __amexpand
+ 0000:174C       __amlink
+ 0000:0378       __amsg_exit
+ 0193:023E       __aseg1
+ 0193:0234       __asegds
+ 0193:0246       __asegh
+ 0193:0240       __asegn
+ 0193:0242       __asegr
+ 0193:0042       __asizds
+ 0193:0258       __asizeC
+ 0193:0259       __asizeD
+ 0000:02D4       __astart
+ 0193:0044       __atopsp
+ 0193:0610       __bufin
+ 0193:0410       __bufout
+ 0193:024A       __cfltcvt_tab
+ 0193:0104       __cflush
+ 0193:00E2       __child
+ 0000:051E       __chkstk
+ 0000:0388       __cinit
+ 0000:0369       __cintDIV
+ 0000:18CE       __cltoasub
+ 0000:04A8       __ctermsub
+ 0000:18DA       __cxtoa
+ 0193:00BE       __doserrno
+ 0000:07E0       __dosret0
+ 0000:07F3       __dosretax
+ 0000:07E8       __dosreturn
+ 0193:00BB       __dosvermajor
+ 0193:00BC       __dosverminor
+ 0000:0463       __exit
+ 0193:00AB       __fac
+ 0000:04F8       __FF_MSGBANNER
+ 0000:08A2       __flsbuf
+ 0193:025C       __fpinit
+ 0000:0518       __fptrap
+ 0000:0AE6       __ftbuf
+ 0193:00E5       __intno
+ 0193:0106       __iob
+ 0193:01A6       __iob2
+ 0193:021E       __lastiob
+ 0000:0800       __maperror
+ 0000:079E       __myalloc
+ 0193:00C0       __nfile
+ 0000:15D4       __nfree
+ 0000:15E6       __nmalloc
+ 0000:074A       __NMSG_TEXT
+ 0000:0775       __NMSG_WRITE
+ 0000:0534       __nullcheck
+ 0193:00BE       __oserr
+ 0193:00C2       __osfile
+ 0193:00BB       __osmajor
+ 0193:00BC       __osminor
+ 0193:00BD       __osmode
+ 0193:00BB       __osversion
+ 0000:0BDC       __output
+ 0193:00E4       __ovlflag
+ 0193:00E6       __ovlvec
+ 0193:00DC       __pgmptr
+ 0193:00B9       __psp
+ 0193:00B7       __pspadr
+ 0193:0246       __QChdata
+ 0000:0556       __setargv
+ 0000:06E4       __setenvp
+ 0193:0256       __sigintoff
+ 0193:0254       __sigintseg
+ 0000:0A38       __stbuf
+ 0193:00B5       __umaskval
+ 0193:00D6       ___argc
+ 0193:00D8       ___argv
+
+  Address         Publics by Value
+
+ 0000:0010       _main
+ 0000:022C       _ADC_10
+ 0000:02D4       __astart
+ 0000:0369       __cintDIV
+ 0000:0378       __amsg_exit
+ 0000:0388       __cinit
+ 0000:044C       _exit
+ 0000:0463       __exit
+ 0000:04A8       __ctermsub
+ 0000:04F8       __FF_MSGBANNER
+ 0000:0518       __fptrap
+ 0000:051E       __chkstk
+ 0000:0534       __nullcheck
+ 0000:0556       __setargv
+ 0000:06E4       __setenvp
+ 0000:074A       __NMSG_TEXT
+ 0000:0775       __NMSG_WRITE
+ 0000:079E       __myalloc
+ 0000:07E0       __dosret0
+ 0000:07E8       __dosreturn
+ 0000:07F3       __dosretax
+ 0000:0800       __maperror
+ 0000:0834       _flushall
+ 0000:0866       _printf
+ 0000:08A2       __flsbuf
+ 0000:0A38       __stbuf
+ 0000:0AE6       __ftbuf
+ 0000:0B74       _fflush
+ 0000:0BDC       __output
+ 0000:1420       _lseek
+ 0000:149A       _write
+ 0000:15C2       _stackavail
+ 0000:15D4       _free
+ 0000:15D4       __nfree
+ 0000:15E6       _malloc
+ 0000:15E6       __nmalloc
+ 0000:162F       __amalloc
+ 0000:1712       __amexpand
+ 0000:174C       __amlink
+ 0000:176E       __amallocbrk
+ 0000:178E       _brkctl
+ 0000:1852       _strcpy
+ 0000:1884       _strlen
+ 0000:18A0       _ultoa
+ 0000:18AA       _isatty
+ 0000:18CE       __cltoasub
+ 0000:18DA       __cxtoa
+ 0193:0042       __asizds
+ 0193:0044       __atopsp
+ 0193:0046       __aexit_rtn
+ 0193:0048       __abrktb
+ 0193:0098       __abrktbe
+ 0193:0098       __abrkp
+ 0193:009A       __acfinfo
+ 0193:00A7       __aintdiv
+ 0193:00AB       __fac
+ 0193:00B3       _errno
+ 0193:00B5       __umaskval
+ 0193:00B7       __pspadr
+ 0193:00B9       __psp
+ 0193:00BB       __osversion
+ 0193:00BB       __dosvermajor
+ 0193:00BB       __osmajor
+ 0193:00BC       __dosverminor
+ 0193:00BC       __osminor
+ 0193:00BD       __osmode
+ 0193:00BE       __oserr
+ 0193:00BE       __doserrno
+ 0193:00C0       __nfile
+ 0193:00C2       __osfile
+ 0193:00D6       ___argc
+ 0193:00D8       ___argv
+ 0193:00DA       _environ
+ 0193:00DC       __pgmptr
+ 0193:00E2       __child
+ 0193:00E4       __ovlflag
+ 0193:00E5       __intno
+ 0193:00E6       __ovlvec
+ 0193:00EA       __adbgmsg
+ 0193:00EC       STKHQQ
+ 0193:0104       __cflush
+ 0193:0106       __iob
+ 0193:01A6       __iob2
+ 0193:021E       __lastiob
+ 0193:0234       __asegds
+ 0193:023E       __aseg1
+ 0193:0240       __asegn
+ 0193:0242       __asegr
+ 0193:0244       __amblksiz
+ 0193:0246       __asegh
+ 0193:0246       __QChdata
+ 0193:024A       __cfltcvt_tab
+ 0193:0254       __sigintseg
+ 0193:0256       __sigintoff
+ 0193:0258       __asizeC
+ 0193:0259       __asizeD
+ 0193:025C       __fpinit
+ 0193:03E0       _edata
+ 0193:0410       __bufout
+ 0193:0610       __bufin
+ 0193:0810       _end
+ 0000:9876  Abs  __acrtused
+ 0000:9876  Abs  __acrtmsg
+
+Program entry point at 0000:02D4

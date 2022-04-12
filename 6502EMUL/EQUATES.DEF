@@ -1,0 +1,40 @@
+;                   -----------------------------------
+;                  |  E  Q  U  A  T  E  S  .  D  E  F  |
+;                   -----------------------------------
+;
+; This module contains definitions of constants used by the 6502 emulator.
+; 
+
+;    -----------------------------------------------------------------
+;   | 6 5 0 2   S t a t u s   R e g i s t e r   D e f i n i t i o n s |
+;    -----------------------------------------------------------------
+
+S_6502	equ	10000000b	; Sign: 0 = positive, 1 = negative
+V_6502	equ	01000000b	; Overflow: indicates a sign change occurred
+B_6502	equ	00010000b	; Break: set by the BRK instruction
+D_6502	equ	00001000b	; Decimal Mode: set for BCD arithmetic
+I_6502	equ	00000100b	; Interrupt Mask: 0 = enabled, 1 = disabled
+Z_6502	equ	00000010b	; Zero: 0 = result non-zero, 1 = result zero
+C_6502	equ	00000001b	; Carry: 0 = borrow/, 1 = carry/
+				;            no carry     no borrow
+
+;    -----------------------------------------------------------------
+;   | 8 0 x 8 6   F l a g s   R e g i s t e r   D e f i n i t i o n s |
+;    -----------------------------------------------------------------
+
+SF_8086	equ	10000000b	; Sign: 0 = positive, 1 = negative
+ZF_8086	equ	01000000b	; Zero: 0 = result non-zero, 1 = result zero
+OF_8086	equ	00000010b	; Overflow: indicates a sign change occurred
+CF_8086	equ	00000001b	; Carry: 0 = no carry/, 1 = carry/
+				;            no borrow      borrow
+
+PL	equ	( 1 LT 0) and SF_8086
+MI	equ	(-1 LT 0) and SF_8086
+
+nmiVector	equ	<word ptr 0FFFAh>
+resetVector	equ	<word ptr 0FFFCh>
+irqVector	equ	<word ptr 0FFFEh>
+
+.B		equ	<byte ptr>
+.W		equ	<word ptr>
+.D		equ	<dword ptr>

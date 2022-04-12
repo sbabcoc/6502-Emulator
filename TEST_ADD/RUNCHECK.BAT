@@ -1,0 +1,16 @@
+fc /lb200 add_0x00 ..\dec_mode.add\add_0x00 > add_diff.x00
+fc /lb200 add_0x10 ..\dec_mode.add\add_0x10 > add_diff.x10
+fc /lb200 add_0x20 ..\dec_mode.add\add_0x20 > add_diff.x20
+fc /lb200 add_0x30 ..\dec_mode.add\add_0x30 > add_diff.x30
+fc /lb200 add_0x40 ..\dec_mode.add\add_0x40 > add_diff.x40
+fc /lb200 add_0x50 ..\dec_mode.add\add_0x50 > add_diff.x50
+fc /lb200 add_0x60 ..\dec_mode.add\add_0x60 > add_diff.x60
+fc /lb200 add_0x70 ..\dec_mode.add\add_0x70 > add_diff.x70
+fc /lb200 add_0x80 ..\dec_mode.add\add_0x80 > add_diff.x80
+fc /lb200 add_0x90 ..\dec_mode.add\add_0x90 > add_diff.x90
+fc /lb200 add_0xA0 ..\dec_mode.add\add_0xA0 > add_diff.xA0
+fc /lb200 add_0xB0 ..\dec_mode.add\add_0xB0 > add_diff.xB0
+fc /lb200 add_0xC0 ..\dec_mode.add\add_0xC0 > add_diff.xC0
+fc /lb200 add_0xD0 ..\dec_mode.add\add_0xD0 > add_diff.xD0
+fc /lb200 add_0xE0 ..\dec_mode.add\add_0xE0 > add_diff.xE0
+fc /lb200 add_0xF0 ..\dec_mode.add\add_0xF0 > add_diff.xF0
