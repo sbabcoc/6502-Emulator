@@ -3,7 +3,7 @@ This repository contains Intel x86 code to emulate the instruction set of the 65
 
 The source is compatible with Microsoft Macro-Assembler 5.1
 
-A couple of files in the **6502EMUL** folder are clearly in mid-revision:
+A few of the files in the **6502EMUL** folder are clearly in mid-revision:
 
 * **MODETAB.ASM**: This file contains a table that combined base instruction execution cycles and addressing mode. I'm pretty sure that I intended to mask off the top nybble of each entry, leaving only the addressing mode.
 * **TIMETAB.ASM**: This file contains just base instruction execution cycles. The comments and label in this file remain after being copied from **MODETAB.ASM**.
