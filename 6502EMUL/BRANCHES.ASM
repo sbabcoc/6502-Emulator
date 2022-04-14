@@ -1,5 +1,5 @@
-	.model	small
-	.code
+        .model  small
+        .code
 
 ;                  --------------------------------------
 ;                 |  B  R  A  N  C  H  E  S  .  A  S  M  |
@@ -10,7 +10,7 @@
 ;
 ; These instructions include:
 ;
-;	BRA - Branch Always
+;       BRA - Branch Always
 ;       BCC - Branch on Carry Clear
 ;       BCS - Branch on Carry Set
 ;       BEQ - Branch on Result Zero
@@ -31,7 +31,8 @@
 ;
 ;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
-include	equates.def
+include equates.def
+include proc_abs.def
 
 ;----------------------------------------------------------------------------
 ;
@@ -44,23 +45,23 @@ include	equates.def
 ;                           -------------------
 
 
-BRA_3	proc	near		;______/ Mode 3: relative addressing \_______
+BRA_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-	inc	_@		; Add one cycle for branch occurrence
-	mov	al,ds:[si]	; Load relative offset into AL
-	cbw			; Sign-extend offset to fill AX
-	inc	si		; Increment the program counter
-	xchg	ax,si		; Move program counter to AX, save offset
-	add	si,ax		; Add program counter to relative offset
-	xor	al,al		; Clear LSB of previous program counter value
-	xor	ax,si		; Did program counter cross a page boundary?
-	jz	@F		; No, procede to the next instruction
+        inc     _@              ; Add one cycle for branch occurrence
+        mov     al,ds:[si]      ; Load relative offset into AL
+        cbw                     ; Sign-extend offset to fill AX
+        inc     si              ; Increment the program counter
+        xchg    ax,si           ; Move program counter to AX, save offset
+        add     si,ax           ; Add program counter to relative offset
+        xor     al,al           ; Clear LSB of previous program counter value
+        xor     ax,si           ; Did program counter cross a page boundary?
+        jz      @F              ; No, procede to the next instruction
 
-	inc	_@		; Add one cycle for page boundary crossing
+        inc     _@              ; Add one cycle for page boundary crossing
 
-@@:	jmp	Fetch6502Opcode	; Procede to the next opcode
+@@:     jmp     Fetch6502Opcode ; Procede to the next opcode
 
-BRA_3	endp
+BRA_3   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -73,15 +74,15 @@ BRA_3	endp
 ;                           -------------------
 
 
-BCC_3	proc	near		;______/ Mode 3: relative addressing \_______
+BCC_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-	test	cl,CF_8086	; Is the carry flag clear?
-	jz	BRA_3		; Yes, perform branch operations
+        test    cl,CF_8086      ; Is the carry flag clear?
+        jz      BRA_3           ; Yes, perform branch operations
 
-	inc	si		; Increment the program counter
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        inc     si              ; Increment the program counter
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-BCC_3	endp
+BCC_3   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -94,15 +95,15 @@ BCC_3	endp
 ;                           -------------------
 
 
-BCS_3	proc	near		;______/ Mode 3: relative addressing \_______
+BCS_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-	test	cl,CF_8086	; Is the carry flag set?
-	jnz	BRA_3		; Yes, perform branch operations
+        test    cl,CF_8086      ; Is the carry flag set?
+        jnz     BRA_3           ; Yes, perform branch operations
 
-	inc	si		; Increment the program counter
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        inc     si              ; Increment the program counter
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-BCS_3	endp
+BCS_3   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -115,15 +116,15 @@ BCS_3	endp
 ;                           -------------------
 
 
-BEQ_3	proc	near		;______/ Mode 3: relative addressing \_______
+BEQ_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-	test	cl,ZF_8086	; Is the zero flag set?
-	jnz	BRA_3		; Yes, perform branch operations
+        test    cl,ZF_8086      ; Is the zero flag set?
+        jnz     BRA_3           ; Yes, perform branch operations
 
-	inc	si		; Increment the program counter
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        inc     si              ; Increment the program counter
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-BEQ_3	endp
+BEQ_3   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -136,15 +137,15 @@ BEQ_3	endp
 ;                            -----------------
 
 
-BMI_3	proc	near		;______/ Mode 3: relative addressing \_______
+BMI_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-	test	cl,SF_8086	; Is the sign flag set?
-	jnz	BRA_3		; Yes, perform branch operations
+        test    cl,SF_8086      ; Is the sign flag set?
+        jnz     BRA_3           ; Yes, perform branch operations
 
-	inc	si		; Increment the program counter
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        inc     si              ; Increment the program counter
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-BMI_3	endp
+BMI_3   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -157,15 +158,15 @@ BMI_3	endp
 ;                           -------------------
 
 
-BNE_3	proc	near		;______/ Mode 3: relative addressing \_______
+BNE_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-	test	cl,ZF_8086	; Is the zero flag clear?
-	jz	BRA_3		; Yes, perform branch operations
+        test    cl,ZF_8086      ; Is the zero flag clear?
+        jz      BRA_3           ; Yes, perform branch operations
 
-	inc	si		; Increment the program counter
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        inc     si              ; Increment the program counter
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-BNE_3	endp
+BNE_3   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -178,15 +179,15 @@ BNE_3	endp
 ;                           -------------------
 
 
-BPL_3	proc	near		;______/ Mode 3: relative addressing \_______
+BPL_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-	test	cl,SF_8086	; Is the sign flag clear?
-	jz	BRA_3		; Yes, perform branch operations
+        test    cl,SF_8086      ; Is the sign flag clear?
+        jz      BRA_3           ; Yes, perform branch operations
 
-	inc	si		; Increment the program counter
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        inc     si              ; Increment the program counter
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-BPL_3	endp
+BPL_3   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -199,15 +200,15 @@ BPL_3	endp
 ;                           -------------------
 
 
-BVC_3	proc	near		;______/ Mode 3: relative addressing \_______
+BVC_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-	test	cl,OF_8086	; Is the overflow flag clear?
-	jz	BRA_3		; Yes, perform branch operations
+        test    cl,OF_8086      ; Is the overflow flag clear?
+        jz      BRA_3           ; Yes, perform branch operations
 
-	inc	si		; Increment the program counter
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        inc     si              ; Increment the program counter
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-BVC_3	endp
+BVC_3   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -220,13 +221,13 @@ BVC_3	endp
 ;                           -------------------
 
 
-BVS_3	proc	near		;______/ Mode 3: relative addressing \_______
+BVS_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-	test	cl,OF_8086	; Is the overflow flag set?
-	jnz	BRA_3		; Yes, perform branch operations
+        test    cl,OF_8086      ; Is the overflow flag set?
+        jnz     BRA_3           ; Yes, perform branch operations
 
-	inc	si		; Increment the program counter
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        inc     si              ; Increment the program counter
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-BVS_3	endp
-	end
+BVS_3   endp
+        end

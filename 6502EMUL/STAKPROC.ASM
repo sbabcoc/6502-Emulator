@@ -1,5 +1,5 @@
-	.model	small
-	.code
+        .model  small
+        .code
 
 ;                  --------------------------------------
 ;                 |  S  T  A  K  P  R  O  C  .  A  S  M  |
@@ -41,15 +41,15 @@
 ;                           -------------------
 
 
-PHA_0	proc	near		;_______/ Mode 0: implied addressing \_______
+PHA_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
-	mov	ds:[bp],ch	; Store Accumulator at stack pointer
-	dec	bp		; Decrement stack pointer
-	or	bp,0100h	; Ensure stack remains on Page 1
+        mov     ds:[bp],ch      ; Store Accumulator at stack pointer
+        dec     bp              ; Decrement stack pointer
+        or      bp,0100h        ; Ensure stack remains on Page 1
 
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-PHA_0	endp
+PHA_0   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -62,16 +62,16 @@ PHA_0	endp
 ;                           -------------------
 
 
-PLA_0	proc	near		;_______/ Mode 0: implied addressing \_______
+PLA_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
-	mov	bx,bp		; BX = current stack pointer
-	inc	bl		; Increment stack pointer
-	mov	bp,bx		; Update stack pointer
-	mov	ch,ds:[bp]	; Load Accumulator at stack pointer
+        mov     bx,bp           ; BX = current stack pointer
+        inc     bl              ; Increment stack pointer
+        mov     bp,bx           ; Update stack pointer
+        mov     ch,ds:[bp]      ; Load Accumulator at stack pointer
 
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-PLA_0	endp
+PLA_0   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -84,21 +84,21 @@ PLA_0	endp
 ;                           -------------------
 
 
-PHP_0	proc	near		;_______/ Mode 0: implied addressing \_______
+PHP_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
-	mov	al,cl			; Get copy of Processor Status
-	test	al,ZF_8086 or OF_8086	; Test swapped flag states
-	jpe	@F			; States are identical - do nothing
+        mov     al,cl                   ; Get copy of Processor Status
+        test    al,ZF_8086 or OF_8086   ; Test swapped flag states
+        jpe     @F                      ; States are identical - do nothing
 
-	xor	al,ZF_8086 or OF_8086	; Invert status flag states to swap
+        xor     al,ZF_8086 or OF_8086   ; Invert status flag states to swap
 
-@@:	mov	ds:[bp],al	; Store Processor Status at stack pointer
-	dec	bp		; Decrement stack pointer
-	or	bp,0100h	; Ensure stack remains on Page 1
+@@:     mov     ds:[bp],al      ; Store Processor Status at stack pointer
+        dec     bp              ; Decrement stack pointer
+        or      bp,0100h        ; Ensure stack remains on Page 1
 
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-PHP_0	endp
+PHP_0   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -111,21 +111,21 @@ PHP_0	endp
 ;                           -------------------
 
 
-PLP_0	proc	near		;_______/ Mode 0: implied addressing \_______
+PLP_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
-	mov	bx,bp		; BX = current stack pointer
-	inc	bl		; Increment stack pointer
-	mov	bp,bx		; Update stack pointer
-	mov	cl,ds:[bp]	; Load Processor Status at stack pointer
+        mov     bx,bp           ; BX = current stack pointer
+        inc     bl              ; Increment stack pointer
+        mov     bp,bx           ; Update stack pointer
+        mov     cl,ds:[bp]      ; Load Processor Status at stack pointer
 
-	test	cl,ZF_8086 or OF_8086	; Test swapped flag states
-	jpe	@F			; States are identical - do nothing
+        test    cl,ZF_8086 or OF_8086   ; Test swapped flag states
+        jpe     @F                      ; States are identical - do nothing
 
-	xor	cl,ZF_8086 or OF_8086	; Invert status flag states to swap
+        xor     cl,ZF_8086 or OF_8086   ; Invert status flag states to swap
 
-@@:	jmp	Fetch6502Opcode	; Procede to the next opcode
+@@:     jmp     Fetch6502Opcode ; Procede to the next opcode
 
-PLP_0	endp
+PLP_0   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -138,15 +138,15 @@ PLP_0	endp
 ;                           -------------------
 
 
-PHX_0	proc	near		;_______/ Mode 0: implied addressing \_______
+PHX_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
-	mov	ds:[bp],dh	; Store Index Register X at stack pointer
-	dec	bp		; Decrement stack pointer
-	or	bp,0100h	; Ensure stack remains on Page 1
+        mov     ds:[bp],dh      ; Store Index Register X at stack pointer
+        dec     bp              ; Decrement stack pointer
+        or      bp,0100h        ; Ensure stack remains on Page 1
 
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-PHX_0	endp
+PHX_0   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -159,16 +159,16 @@ PHX_0	endp
 ;                           -------------------
 
 
-PLX_0	proc	near		;_______/ Mode 0: implied addressing \_______
+PLX_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
-	mov	bx,bp		; BX = current stack pointer
-	inc	bl		; Increment stack pointer
-	mov	bp,bx		; Update stack pointer
-	mov	dh,ds:[bp]	; Load Index Register X at stack pointer
+        mov     bx,bp           ; BX = current stack pointer
+        inc     bl              ; Increment stack pointer
+        mov     bp,bx           ; Update stack pointer
+        mov     dh,ds:[bp]      ; Load Index Register X at stack pointer
 
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-PLX_0	endp
+PLX_0   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -181,15 +181,15 @@ PLX_0	endp
 ;                           -------------------
 
 
-PHY_0	proc	near		;_______/ Mode 0: implied addressing \_______
+PHY_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
-	mov	ds:[bp],dl	; Store Index Register Y at stack pointer
-	dec	bp		; Decrement stack pointer
-	or	bp,0100h	; Ensure stack remains on Page 1
+        mov     ds:[bp],dl      ; Store Index Register Y at stack pointer
+        dec     bp              ; Decrement stack pointer
+        or      bp,0100h        ; Ensure stack remains on Page 1
 
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-PHY_0	endp
+PHY_0   endp
 
 ;----------------------------------------------------------------------------
 ;
@@ -202,14 +202,14 @@ PHY_0	endp
 ;                           -------------------
 
 
-PLY_0	proc	near		;_______/ Mode 0: implied addressing \_______
+PLY_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
-	mov	bx,bp		; BX = current stack pointer
-	inc	bl		; Increment stack pointer
-	mov	bp,bx		; Update stack pointer
-	mov	dl,ds:[bp]	; Load Index Register Y at stack pointer
+        mov     bx,bp           ; BX = current stack pointer
+        inc     bl              ; Increment stack pointer
+        mov     bp,bx           ; Update stack pointer
+        mov     dl,ds:[bp]      ; Load Index Register Y at stack pointer
 
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-PLY_0	endp
-	end
+PLY_0   endp
+        end

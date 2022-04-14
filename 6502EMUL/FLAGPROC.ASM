@@ -1,5 +1,5 @@
-	.model	small
-	.code
+        .model  small
+        .code
 
 ;                  --------------------------------------
 ;                 |  F  L  A  G  P  R  O  C  .  A  S  M  |
@@ -32,53 +32,56 @@
 ;               |@@:                                    |
 ;                ---------------------------------------
 
-include	equates.def
-
-FlagSZ		proc	near	; Merge SF & ZF into 6502 status
-
-	lahf			; AH = 8086 processor status
-
-	and	ah,SF_8086 or ZF_8086		;/ Merge 8086 SF & ZF \
-	and	cl,not (SF_8086 or ZF_8086)	;|  into 6502 status  |
-	or	cl,ah				;\   register image   /
-
-	jmp	Fetch6502Opcode	; Procede to the next opcode
-
-FlagSZ		endp
+include equates.def
+include proc_abs.def
 
 ;----------------------------------------------------------------------------
 
-FlagSZC	proc	near		; Merge SF, ZF & CF into 6502 status
+FlagSZ          proc    near    ; Merge SF & ZF into 6502 status
 
-	lahf			; AH = 8086 processor status
+        lahf                    ; AH = 8086 processor status
 
-	and	ah,SF_8086 or ZF_8086 or CF_8086	;/ Merge SF, ZF & CF \
-	and	cl,not (SF_8086 or ZF_8086 or CF_8086)	;| into 6502 status  |
-	or	cl,ah					;\  register image   /
+        and     ah,SF_8086 or ZF_8086           ;/ Merge 8086 SF & ZF \
+        and     cl,not (SF_8086 or ZF_8086)     ;|  into 6502 status  |
+        or      cl,ah                           ;\   register image   /
 
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-FlagSZC	endp
+FlagSZ          endp
 
 ;----------------------------------------------------------------------------
 
-FlagSVZC	proc	near	; Merge SF, OF, ZF & CF into 6502 status
+FlagSZC proc    near            ; Merge SF, ZF & CF into 6502 status
 
-	lahf			; AH = 8086 processor status
+        lahf                    ; AH = 8086 processor status
 
-	;---- Load default mask for 8086 flags image ---,
-	mov	al,SF_8086 or ZF_8086 or CF_8086	; AL = default mask
-	jno	@F					;/ If no overflow, \
-							;\    merge now    /
+        and     ah,SF_8086 or ZF_8086 or CF_8086        ;/ Merge SF, ZF & CF \
+        and     cl,not (SF_8086 or ZF_8086 or CF_8086)  ;| into 6502 status  |
+        or      cl,ah                                   ;\  register image   /
 
-	or	ax,OF_8086 shl 8 or OF_8086	; Set OF in mask and image
+        jmp     Fetch6502Opcode ; Procede to the next opcode
 
-	;-- Merge 8086 SF, OF, ZF & CF into 6502 status register image -,
-@@:	and	ah,al							;
-	and	cl,not (SF_8086 or OF_8086 or ZF_8086 or CF_8086)	;
-	or	cl,ah							;
+FlagSZC endp
 
-	jmp	Fetch6502Opcode	; Procede to the next opcode
+;----------------------------------------------------------------------------
 
-FlagSVZC	endp
-		end
+FlagSVZC        proc    near    ; Merge SF, OF, ZF & CF into 6502 status
+
+        lahf                    ; AH = 8086 processor status
+
+        ;---- Load default mask for 8086 flags image ---,
+        mov     al,SF_8086 or ZF_8086 or CF_8086        ; AL = default mask
+        jno     @F                                      ;/ If no overflow, \
+                                                        ;\    merge now    /
+
+        or      ax,OF_8086 shl 8 or OF_8086     ; Set OF in mask and image
+
+        ;-- Merge 8086 SF, OF, ZF & CF into 6502 status register image -,
+@@:     and     ah,al                                                   ;
+        and     cl,not (SF_8086 or OF_8086 or ZF_8086 or CF_8086)       ;
+        or      cl,ah                                                   ;
+
+        jmp     Fetch6502Opcode ; Procede to the next opcode
+
+FlagSVZC        endp
+                end
