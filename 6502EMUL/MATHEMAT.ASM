@@ -25,7 +25,9 @@
 ;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 include equates.def
-include proc_abs.def
+
+extrn   Fetch6502Opcode:abs
+extrn   FlagSVZC:abs
 
 ;----------------------------------------------------------------------------
 

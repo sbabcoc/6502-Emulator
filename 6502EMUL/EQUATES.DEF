@@ -5,6 +5,8 @@
 ; This module contains definitions of constants used by the 6502 emulator.
 ; 
 
+option  dotname
+
 ;    -----------------------------------------------------------------
 ;   | 6 5 0 2   S t a t u s   R e g i s t e r   D e f i n i t i o n s |
 ;    -----------------------------------------------------------------

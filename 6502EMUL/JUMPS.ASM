@@ -13,6 +13,11 @@
 ;       JMP - Jump
 ;       JSR - Jump to Subroutine
 ;       RTS - Return from Subroutine
+;       NOP - No Operation
+;
+; NOTE: The 'NOP' instruction isn't technically a jump, but its only effect
+;       is on the program counter, which is the primary focus of the other
+;       instruction in this group.
 ;
 ; Upon entry, the following register conventions apply:
 ;
@@ -26,7 +31,8 @@
 ;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 include equates.def
-include proc_abs.def
+
+extrn   Fetch6502Opcode:abs
 
 ;----------------------------------------------------------------------------
 ;
@@ -118,4 +124,21 @@ RTS_0   proc    near            ;_______/ Mode 0: implied addressing \_______
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 RTS_0   endp
+
+;----------------------------------------------------------------------------
+;
+;                           -------------------
+;                          | @   @  @@@  @@@@  |
+;                          | @@  @ @   @ @   @ |
+;                          | @ @ @ @   @ @@@@  |
+;                          | @  @@ @   @ @     |
+;                          | @   @  @@@  @     |
+;                           -------------------
+
+
+NOP_0   proc    near            ;_______/ Mode 0: implied addressing \_______
+
+        jmp     Fetch6502Opcode ; Procede to the next opcode
+
+NOP_0   endp
         end
