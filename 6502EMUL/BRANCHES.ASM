@@ -28,8 +28,6 @@
 ;       SI - Program Counter
 ;       BP - Stack Pointer
 ;       cl - Processor Status Register
-;
-;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 include equates.def
 
@@ -48,7 +46,7 @@ extrn   Fetch6502Opcode:abs
 
 BRA_3   proc    near            ;______/ Mode 3: relative addressing \_______
 
-        inc     _@              ; Add one cycle for branch occurrence
+        mov     bl,3            ; Set instruction cycle time
         mov     al,ds:[si]      ; Load relative offset into AL
         cbw                     ; Sign-extend offset to fill AX
         inc     si              ; Increment the program counter
@@ -58,7 +56,7 @@ BRA_3   proc    near            ;______/ Mode 3: relative addressing \_______
         xor     ax,si           ; Did program counter cross a page boundary?
         jz      @F              ; No, procede to the next instruction
 
-        inc     _@              ; Add one cycle for page boundary crossing
+        inc     bl              ; Add one cycle for page boundary crossing
 
 @@:     jmp     Fetch6502Opcode ; Procede to the next opcode
 
@@ -81,6 +79,7 @@ BCC_3   proc    near            ;______/ Mode 3: relative addressing \_______
         jz      BRA_3           ; Yes, perform branch operations
 
         inc     si              ; Increment the program counter
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BCC_3   endp
@@ -102,6 +101,7 @@ BCS_3   proc    near            ;______/ Mode 3: relative addressing \_______
         jnz     BRA_3           ; Yes, perform branch operations
 
         inc     si              ; Increment the program counter
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BCS_3   endp
@@ -123,6 +123,7 @@ BEQ_3   proc    near            ;______/ Mode 3: relative addressing \_______
         jnz     BRA_3           ; Yes, perform branch operations
 
         inc     si              ; Increment the program counter
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BEQ_3   endp
@@ -144,6 +145,7 @@ BMI_3   proc    near            ;______/ Mode 3: relative addressing \_______
         jnz     BRA_3           ; Yes, perform branch operations
 
         inc     si              ; Increment the program counter
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BMI_3   endp
@@ -165,6 +167,7 @@ BNE_3   proc    near            ;______/ Mode 3: relative addressing \_______
         jz      BRA_3           ; Yes, perform branch operations
 
         inc     si              ; Increment the program counter
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BNE_3   endp
@@ -186,6 +189,7 @@ BPL_3   proc    near            ;______/ Mode 3: relative addressing \_______
         jz      BRA_3           ; Yes, perform branch operations
 
         inc     si              ; Increment the program counter
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BPL_3   endp
@@ -207,6 +211,7 @@ BVC_3   proc    near            ;______/ Mode 3: relative addressing \_______
         jz      BRA_3           ; Yes, perform branch operations
 
         inc     si              ; Increment the program counter
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BVC_3   endp
@@ -228,6 +233,7 @@ BVS_3   proc    near            ;______/ Mode 3: relative addressing \_______
         jnz     BRA_3           ; Yes, perform branch operations
 
         inc     si              ; Increment the program counter
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BVS_3   endp

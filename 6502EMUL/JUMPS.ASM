@@ -27,8 +27,6 @@
 ;       SI - Program Counter
 ;       BP - Stack Pointer
 ;       cl - Processor Status Register
-;
-;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 include equates.def
 
@@ -48,6 +46,7 @@ extrn   Fetch6502Opcode:abs
 JMP_4   proc    near            ;______/ Mode 4: absolute addressing \_______
 
         mov     si,ds:[si]      ; Load Program Counter with destination address
+        mov     bl,3            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 JMP_4   endp
@@ -58,6 +57,7 @@ JMP_A   proc    near            ;__/ Mode A: absolute indirect addressing \__
 
         mov     bx,ds:[si]      ; Get pointer to specified location
         mov     si,ds:[bx]      ; Load Program Counter with destination address
+        mov     bl,5            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 JMP_A   endp
@@ -70,6 +70,7 @@ JMP_B   proc    near            ;_/ Mode B: absolute pre-indexed indirect \__
         add     bl,dh           ;/ Add index register X \
         adc     bh,0            ;\                      /
         mov     si,ds:[bx]      ; Load Program Counter with destination address
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 JMP_B   endp
@@ -96,6 +97,7 @@ JSR_4   proc    near            ;______/ Mode 4: absolute addressing \_______
         dec     bl              ; Decrement stack pointer
         mov     bp,bx           ; Update stack pointer
         mov     si,ds:[si]      ; Load Program Counter with subroutine address
+        mov     bl,6            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 JSR_4   endp
@@ -121,6 +123,7 @@ RTS_0   proc    near            ;_______/ Mode 0: implied addressing \_______
         inc     ax              ; Increment return address
         mov     bp,bx           ; Update stack pointer
         mov     si,ax           ; Load Program counter with return address
+        mov     bl,6            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 RTS_0   endp
@@ -138,6 +141,7 @@ RTS_0   endp
 
 NOP_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 NOP_0   endp

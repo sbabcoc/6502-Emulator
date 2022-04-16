@@ -21,8 +21,6 @@
 ;       SI - Program Counter
 ;       BP - Stack Pointer
 ;       cl - Processor Status Register
-;
-;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 include equates.def
 
@@ -46,6 +44,7 @@ AddProc dw      ADC_Bin,0,0,0,ADC_Dec
 
 ADC_2   proc    near            ;______/ Mode 2: immediate addressing \______
 
+        mov     ah,2            ; Set instruction cycle time
         mov     al,ds:[si]      ; AL = immediate data at program counter
         inc     si              ; Advance program counter
         mov     bl,cl
@@ -58,6 +57,7 @@ ADC_2   endp
 
 ADC_4   proc    near            ;______/ Mode 4: absolute addressing \_______
 
+        mov     ah,4            ; Set instruction cycle time
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         mov     al,ds:[bx]      ; AL = data at specified location
@@ -71,13 +71,14 @@ ADC_4   endp
 
 ADC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
 
+        mov     ah,4            ; Set instruction cycle time
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         add     bl,dh           ; Add index register X
         jnc     @F              ; Jump if index did not exceed page boundary
 
         inc     bh              ; Increment page number
-        inc     _@              ; Add one clock cycle for boundary crossing
+        inc     ah              ; Add one clock cycle for boundary crossing
 
 @@:
         mov     al,ds:[bx]      ; AL = data at specified location
@@ -91,13 +92,14 @@ ADC_5   endp
 
 ADC_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
 
+        mov     ah,4            ; Set instruction cycle time
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         add     bl,dl           ; Add index register Y
         jnc     @F              ; Jump if index did not exceed page boundary
 
         inc     bh              ; Increment page number
-        inc     _@              ; Add one clock cycle for boundary crossing
+        inc     ah              ; Add one clock cycle for boundary crossing
 
 @@:
         mov     al,ds:[bx]      ; AL = data at specified location
@@ -111,6 +113,7 @@ ADC_6   endp
 
 ADC_7   proc    near            ;______/ Mode 7: zero page addressing \______
 
+        mov     ah,3            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         inc     si              ; Advance program counter
         xor     bh,bh           ; Ensure that MSB equals zero
@@ -125,6 +128,7 @@ ADC_7   endp
 
 ADC_8   proc    near            ;____/ Mode 8: zero page indexed with X \____
 
+        mov     ah,4            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         inc     si              ; Advance program counter
         add     bl,dh           ; Add index register X
@@ -140,6 +144,7 @@ ADC_8   endp
 
 ADC_D   proc    near            ;_______/ Mode D: zero page indirect \_______
 
+        mov     ah,2            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         inc     si              ; Advance program counter
         xor     bh,bh           ; Ensure that MSB equals zero
@@ -155,6 +160,7 @@ ADC_D   endp
 
 ADC_E   proc    near            ;______/ Mode E: pre-indexed indirect \______
 
+        mov     ah,6            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         inc     si              ; Advance program counter
         add     bl,dh           ; Add index register X
@@ -171,6 +177,7 @@ ADC_E   endp
 
 ADC_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
 
+        mov     ah,5            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         xor     bh,bh           ; Ensure that MSB equals zero
         mov     bx,ds:[bx]      ; Load base for effective address
@@ -178,7 +185,7 @@ ADC_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         jnc     @F              ; Jump if index did not exceed page boundary
 
         inc     bh              ; Increment page number
-        inc     _@              ; Add one cycle for boundary crossing
+        inc     ah              ; Add one cycle for boundary crossing
 
 @@:
         mov     al,ds:[bx]      ; AL = data at specified location
@@ -194,6 +201,7 @@ ADC_Bin proc    near            ; Binary-mode add
 
         assume  ds:_TEXT
 
+        mov     bl,ah           ; BL = instruction cycle time
         ror     cl,1            ; Move 6502 Carry into 8086 Carry
         rol     cl,1            ; Restore processor status
         adc     ch,al
@@ -207,6 +215,8 @@ ADC_Dec proc    near                    ; Decimal-mode add
 
         assume  ds:_TEXT
 
+        mov     bl,ah                   ; BL = instruction cycle time
+        push    bx                      ; Preserve the BX resister
         push    di                      ; Preserve the DI register
 
         ;  --------------------------------
@@ -296,6 +306,7 @@ ENDIF   ;-----------------------------------------------------------------------
         mov     ch,al           ; .A = result
 
         pop     di              ; Restore the DI register
+        pop     bx              ; Restore the BX register
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 ;----------------------------------------------------------------------------
@@ -332,6 +343,7 @@ SubProc dw      SBC_Bin,0,0,0,SBC_Dec
 
 SBC_2   proc    near            ;______/ Mode 2: immediate addressing \______
 
+        mov     ah,2            ; Set instruction cycle time
         mov     al,ds:[si]      ; AL = immediate data at program counter
         inc     si              ; Advance program counter
         mov     bl,cl
@@ -342,8 +354,10 @@ SBC_2   endp
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+SBC_4 (4)
 SBC_4   proc    near            ;______/ Mode 4: absolute addressing \_______
 
+        mov     ah,4            ; Set instruction cycle time
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         mov     al,ds:[bx]      ; AL = data at specified location
@@ -355,15 +369,17 @@ SBC_4   endp
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+SBC_5 (4)
 SBC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
 
+        mov     ah,4            ; Set instruction cycle time
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         add     bl,dh           ; Add index register X
         jnc     @F              ; Jump if index did not exceed page boundary
 
         inc     bh              ; Increment page number
-        inc     _@              ; Add one clock cycle for boundary crossing
+        inc     ah              ; Add one clock cycle for boundary crossing
 
 @@:
         mov     al,ds:[bx]      ; AL = data at specified location
@@ -377,13 +393,14 @@ SBC_5   endp
 
 SBC_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
 
+        mov     ah,4            ; Set instruction cycle time
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         add     bl,dl           ; Add index register Y
         jnc     @F              ; Jump if index did not exceed page boundary
 
         inc     bh              ; Increment page number
-        inc     _@              ; Add one clock cycle for boundary crossing
+        inc     ah              ; Add one clock cycle for boundary crossing
 
 @@:
         mov     al,ds:[bx]      ; AL = data at specified location
@@ -397,6 +414,7 @@ SBC_6   endp
 
 SBC_7   proc    near            ;______/ Mode 7: zero page addressing \______
 
+        mov     ah,3            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         inc     si              ; Advance program counter
         xor     bh,bh           ; Ensure that MSB equals zero
@@ -411,6 +429,7 @@ SBC_7   endp
 
 SBC_8   proc    near            ;____/ Mode 8: zero page indexed with X \____
 
+        mov     ah,4            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         inc     si              ; Advance program counter
         add     bl,dh           ; Add index register X
@@ -426,6 +445,7 @@ SBC_8   endp
 
 SBC_D   proc    near            ;_______/ Mode D: zero page indirect \_______
 
+        mov     ah,2            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         inc     si              ; Advance program counter
         xor     bh,bh           ; Ensure that MSB equals zero
@@ -441,6 +461,7 @@ SBC_D   endp
 
 SBC_E   proc    near            ;______/ Mode E: pre-indexed indirect \______
 
+        mov     ah,6            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         inc     si              ; Advance program counter
         add     bl,dh           ; Add index register X
@@ -457,6 +478,7 @@ SBC_E   endp
 
 SBC_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
 
+        mov     ah,5            ; Set instruction cycle time
         mov     bl,ds:[si]      ; Get pointer to specified location
         xor     bh,bh           ; Ensure that MSB equals zero
         mov     bx,ds:[bx]      ; Load base for effective address
@@ -464,7 +486,7 @@ SBC_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         jnc     @F              ; Jump if index did not exceed page boundary
 
         inc     bh              ; Increment page number
-        inc     _@              ; Add one cycle for boundary crossing
+        inc     ah              ; Add one cycle for boundary crossing
 
 @@:
         mov     al,ds:[bx]      ; AL = data at specified location
@@ -480,6 +502,7 @@ SBC_Bin proc    near            ; Binary-mode subtract
 
         assume  ds:_TEXT
 
+        mov     bl,ah           ; BL = instruction cycle time
         ror     cl,1            ; Move 6502 Carry into 8086 Carry
         rol     cl,1            ; Restore processor status
         cmc
@@ -495,6 +518,8 @@ SBC_Dec proc    near                    ; Decimal-mode subtract
 
         assume  ds:_TEXT
 
+        mov     bl,ah                   ; BL = instruction cycle time
+        push    bx                      ; Preserve the BX resister
         push    di                      ; Preserve the DI register
 
         ;  ----------------------------------------------------
@@ -587,6 +612,7 @@ ENDIF   ;-----------------------------------------------------------------------
         xor     cl,CF_8086      ; Invert carry
 
         pop     di              ; Restore the DI register
+        pop     bx              ; Restore the BX register
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 ;----------------------------------------------------------------------------

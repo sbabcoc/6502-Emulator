@@ -26,8 +26,6 @@
 ;       SI - Program Counter
 ;       BP - Stack Pointer
 ;       cl - Processor Status Register
-;
-;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 include equates.def
 
@@ -47,6 +45,7 @@ extrn   Fetch6502Opcode:abs
 CLC_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         and     cl,not C_6502   ; Clear the Carry Flag
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 CLC_0   endp
@@ -65,6 +64,7 @@ CLC_0   endp
 CLD_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         and     cl,not D_6502   ; Clear the Decimal Mode Flag
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 CLD_0   endp
@@ -83,6 +83,7 @@ CLD_0   endp
 CLI_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         and     cl,not I_6502   ; Clear the Interrupt Disable Flag
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 CLI_0   endp
@@ -101,6 +102,7 @@ CLI_0   endp
 CLV_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         and     cl,not OF_8086  ; Use 8086 Overflow Flag definition
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 CLV_0   endp
@@ -119,6 +121,7 @@ CLV_0   endp
 SEC_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         or      cl,C_6502       ; Set the Carry Flag
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 SEC_0   endp
@@ -137,6 +140,7 @@ SEC_0   endp
 SED_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         or      cl,D_6502       ; Set the Decimal Mode Flag
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 SED_0   endp
@@ -155,6 +159,7 @@ SED_0   endp
 SEI_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         or      cl,I_6502       ; Set the Interrupt Disable Flag
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 SEI_0   endp

@@ -25,8 +25,6 @@
 ;       SI - Program Counter
 ;       BP - Stack Pointer
 ;       cl - Processor Status Register
-;
-;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 ;----------------------------------------------------------------------------
 ;
@@ -42,6 +40,7 @@
 TXA_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         mov     ch,dh           ; Move index register X to Accumulator
+        mov     bl,2            ; Set instruction cycle time
         test    ch,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -61,6 +60,7 @@ TXA_0   endp
 TAX_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         mov     dh,ch           ; Move Accumulator to index register X
+        mov     bl,2            ; Set instruction cycle time
         test    dh,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -80,6 +80,7 @@ TAX_0   endp
 TYA_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         mov     ch,dl           ; Move index register Y to Accumulator
+        mov     bl,2            ; Set instruction cycle time
         test    ch,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -99,6 +100,7 @@ TYA_0   endp
 TAY_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         mov     dl,ch           ; Move Accumulator to index register Y
+        mov     bl,2            ; Set instruction cycle time
         test    dl,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -121,6 +123,7 @@ TXS_0   proc    near            ;_______/ Mode 0: implied addressing \_______
         mov     ah,01           ; Convert to stack pointer format 
         mov     bp,ax           ; Transfer resultant offset to stack pointer
 
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 TXS_0   endp
@@ -140,6 +143,7 @@ TSX_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         mov     ax,bp           ; Get copy of stack pointer
         mov     dh,al           ; Transfer low byte to index register X
+        mov     bl,2            ; Set instruction cycle time
         test    dh,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete the cycle
 

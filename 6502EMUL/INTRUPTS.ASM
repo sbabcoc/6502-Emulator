@@ -21,8 +21,6 @@
 ;       SI - Program Counter
 ;       BP - Stack Pointer
 ;       cl - Processor Status Register
-;
-;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 include equates.def
 
@@ -37,6 +35,7 @@ extrn   Fetch6502Opcode:abs
 ;                           | @  @    @    @  |
 ;                           | @   @   @   @@@ |
 ;                            -----------------
+
 
 RTI_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
@@ -57,6 +56,7 @@ RTI_0   proc    near            ;_______/ Mode 0: implied addressing \_______
         mov     ah,ds:[bx]      ; Load MSB of return address at stack pointer
         mov     bp,bx           ; Update stack pointer
         mov     si,ax           ; Load Program counter with return address
+        mov     bl,6            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 RTI_0   endp
@@ -70,6 +70,7 @@ RTI_0   endp
 ;                          | @  @      @   @   |
 ;                          | @   @ @@@@    @   |
 ;                           -------------------
+
 
 RST     proc    near
 
@@ -89,6 +90,7 @@ RST     endp
 ;                          | @@@@  @   @ @   @ |
 ;                           -------------------
 
+
 BRK_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         inc     si              ; Increment program counter
@@ -100,6 +102,7 @@ IRQ     proc   near
 
         call    SaveContext
         mov     si,irqVector    ; Load Program Counter with IRQ Vector
+        mov     bl,7            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 IRQ     endp
@@ -114,6 +117,7 @@ BRK_0   endp
 ;                           | @  @@ @   @  @  |
 ;                           | @   @ @   @ @@@ |
 ;                            -----------------
+
 
 NMI_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 

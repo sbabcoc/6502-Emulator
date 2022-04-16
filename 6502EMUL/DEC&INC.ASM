@@ -27,8 +27,6 @@
 ;       SI - Program Counter
 ;       BP - Stack Pointer
 ;       cl - Processor Status Register
-;
-;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 include equates.def
 
@@ -48,6 +46,7 @@ extrn   FlagSZ:abs
 DEA_1   proc    near            ;_____/ Mode 1: accumulator addressing \_____                             
 
         dec     ch              ; Decrement Accumulator
+        mov     bl,2            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 DEA_1   endp
@@ -68,6 +67,7 @@ DEC_4   proc    near            ;______/ Mode 4: absolute addressing \_______
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         dec     ds:[bx]         ; Decrement data at specified location
+        mov     bl,6            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 DEC_4   endp
@@ -76,16 +76,18 @@ DEC_4   endp
 
 DEC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____                                           
 
+        mov     ah,7            ; Set instruction cycle time
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         add     bl,dh           ; Add index register X
         jnc     @F              ; Jump if index did not exceed page boundary
 
         inc     bh              ; Increment page number
-        inc     _@              ; Add one clock cycle for boundary crossing
+        inc     ah              ; Add one clock cycle for boundary crossing
 
 @@:
         dec     ds:[bx]         ; Decrement data at specified location
+        mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 DEC_5   endp
@@ -98,6 +100,7 @@ DEC_7   proc    near            ;______/ Mode 7: zero page addressing \______
         inc     si              ; Advance program counter
         xor     bh,bh           ; Ensure that MSB equals zero
         dec     ds:[bx]         ; Decrement data at specified location
+        mov     bl,5            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 DEC_7   endp
@@ -111,6 +114,7 @@ DEC_8   proc    near            ;____/ Mode 8: zero page indexed with X \____
         add     bl,dh           ; Add index register X
         xor     bh,bh           ; Ensure that MSB equals zero
         dec     ds:[bx]         ; Decrement data at specified location
+        mov     bl,6            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 DEC_8   endp
@@ -129,6 +133,7 @@ DEC_8   endp
 DEX_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         dec     dh              ; Decrement Index Register X
+        mov     bl,2            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 DEX_0   endp
@@ -147,6 +152,7 @@ DEX_0   endp
 DEY_0   proc    near            ;_______/ Mode 0: implied addressing \_______                           
 
         dec     dl              ; Decrement Index Register Y
+        mov     bl,2            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 DEY_0   endp
@@ -165,6 +171,7 @@ DEY_0   endp
 INA_1   proc    near            ;_____/ Mode 1: accumulator addressing \_____
 
         inc     ch              ; Increment Accumulator
+        mov     bl,2            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 INA_1   endp
@@ -185,24 +192,28 @@ INC_4   proc    near            ;______/ Mode 4: absolute addressing \_______
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         inc     ds:[bx]         ; Increment data at specified locatio
+        mov     bl,6            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 INC_4   endp
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+INC_5 (4)
 INC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
 
+        mov     ah,4            ; Set instruction cycle time
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         add     bl,dh           ; Add index register X
         jnc     @F              ; Jump if index did not exceed page boundary
 
         inc     bh              ; Increment page number
-        inc     _@              ; Add one clock cycle for boundary crossing
+        inc     ah              ; Add one clock cycle for boundary crossing
 
 @@:
         inc     ds:[bx]         ; Increment data at specified location
+        mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 INC_5   endp
@@ -215,6 +226,7 @@ INC_7   proc    near            ;______/ Mode 7: zero page addressing \______
         inc     si              ; Advance program counter
         xor     bh,bh           ; Ensure that MSB equals zero
         inc     ds:[bx]         ; Increment data at specified location
+        mov     bl,5            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 INC_7   endp
@@ -228,6 +240,7 @@ INC_8   proc    near            ;____/ Mode 8: zero page indexed with X \____
         add     bl,dh           ; Add index register X
         xor     bh,bh           ; Ensure that MSB equals zero
         inc     ds:[bx]         ; Increment data at specified location
+        mov     bl,6            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 INC_8   endp
@@ -246,6 +259,7 @@ INC_8   endp
 INX_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         inc     dh              ; Increment Index Register X
+        mov     bl,2            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 INX_0   endp
@@ -264,6 +278,7 @@ INX_0   endp
 INY_0   proc    near            ;_______/ Mode 0: implied addressing \_______
 
         inc     dl              ; Increment Index Register Y
+        mov     bl,2            ; Set instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
 INY_0   endp

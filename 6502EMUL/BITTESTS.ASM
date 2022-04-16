@@ -22,8 +22,6 @@
 ;       SI - Program Counter
 ;       BP - Stack Pointer
 ;       cl - Processor Status Register
-;
-;       _@ - Base execution cycles for instruction (from TIMETAB.ASM)
 
 include equates.def
 
@@ -57,6 +55,7 @@ BIT_2   proc    near            ;______/ Mode 2: immediate addressing \______
         and     cl,not (SF_8086 or ZF_8086 or OF_8086)  ;/ Merge result into \
         or      cl,al                                   ;\ 6502 status image /
 
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BIT_2   endp
@@ -81,6 +80,7 @@ BIT_4   proc    near            ;______/ Mode 4: absolute addressing \_______
         and     cl,not (SF_8086 or ZF_8086 or OF_8086)  ;/ Merge result into \
         or      cl,al                                   ;\ 6502 status image /
 
+        mov     bl,4            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BIT_4   endp
@@ -89,16 +89,18 @@ BIT_4   endp
 
 BIT_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
 
+        mov     ah,2            ; Set instruction cycle time
         mov     bx,ds:[si]      ; Get pointer to specified location
         add     si,2            ; Advance program counter
         add     bl,dh           ; Add index register X
         jnc     @F              ; Jump if index did not exceed page boundary
 
         inc     bh              ; Increment page number
-        inc     _@              ; Add one clock cycle for boundary crossing
+        inc     ah              ; Add one clock cycle for boundary crossing
 
 @@:
         mov     al,ds:[bx]      ; AL = data at specified location
+        mov     bl,ah           ; BL = instruction cycle time
         test    ch,al           ; Test memory bits with Accumulator
 
         lahf                                            ; AH = results of test
@@ -137,6 +139,7 @@ BIT_7   proc    near            ;______/ Mode 7: zero page addressing \______
         and     cl,not (SF_8086 or ZF_8086 or OF_8086)  ;/ Merge result into \
         or      cl,al                                   ;\ 6502 status image /
 
+        mov     bl,3            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BIT_7   endp
@@ -163,6 +166,7 @@ BIT_8   proc    near            ;____/ Mode 8: zero page indexed with X \____
         and     cl,not (SF_8086 or ZF_8086 or OF_8086)  ;/ Merge result into \
         or      cl,al                                   ;\ 6502 status image /
 
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 BIT_8   endp
@@ -198,6 +202,7 @@ TRB_4   proc    near            ;______/ Mode 4: absolute addressing \_______
 
         or      ds:[bx],ch      ;/ Reset memory bits \
         xor     ds:[bx],ch      ;\ with Accumulator  /
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 TRB_4   endp
@@ -225,6 +230,7 @@ TRB_7   proc    near            ;______/ Mode 7: zero page addressing \______
 
         or      ds:[bx],ch      ;/ Reset memory bits \
         xor     ds:[bx],ch      ;\ with Accumulator  /
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 TRB_7   endp
@@ -259,6 +265,7 @@ TSB_4   proc    near            ;______/ Mode 4: absolute addressing \_______
         or      cl,al                                   ;\ 6502 status image /
 
         or      ds:[bx],ch      ; Set memory bits with Accumulator
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 TSB_4   endp
@@ -285,6 +292,7 @@ TSB_7   proc    near            ;______/ Mode 7: zero page addressing \______
         or      cl,al                                   ;\ 6502 status image /
 
         or      ds:[bx],ch      ; Set memory bits with Accumulator
+        mov     bl,2            ; Set instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
 
 TSB_7   endp
