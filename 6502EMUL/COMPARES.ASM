@@ -72,8 +72,7 @@ CMP_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        cmp     ch,ds:[bx]      ; Compare with data at specified location
+@@:     cmp     ch,ds:[bx]      ; Compare with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZC         ; Merge flags to complete the cycle
 
@@ -92,8 +91,7 @@ CMP_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        cmp     ch,ds:[bx]      ; Compare with data at specified location
+@@:     cmp     ch,ds:[bx]      ; Compare with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZC         ; Merge flags to complete the cycle
 
@@ -170,8 +168,7 @@ CMP_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         inc     bh              ; Increment page number
         inc     ah              ; Add one cycle for boundary crossing
 
-@@:
-        cmp     ch,ds:[bx]      ; Compare with data at specified location
+@@:     cmp     ch,ds:[bx]      ; Compare with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZC         ; Merge flags to complete the cycle
 

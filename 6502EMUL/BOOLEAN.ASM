@@ -72,8 +72,7 @@ AND_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        and     ch,ds:[bx]      ; "AND" with data at specified location
+@@:     and     ch,ds:[bx]      ; "AND" with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -92,8 +91,7 @@ AND_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        and     ch,ds:[bx]      ; "AND" with data at specified location
+@@:     and     ch,ds:[bx]      ; "AND" with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -170,8 +168,7 @@ AND_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         inc     bh              ; Increment page number
         inc     ah              ; Add one cycle for boundary crossing
 
-@@:
-        and     ch,ds:[bx]      ; "AND" with data at specified location
+@@:     and     ch,ds:[bx]      ; "AND" with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -222,8 +219,7 @@ EOR_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        xor     ch,ds:[bx]      ; "EOR" with data at specified location
+@@:     xor     ch,ds:[bx]      ; "EOR" with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -242,8 +238,7 @@ EOR_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        xor     ch,ds:[bx]      ; "EOR" with data at specified location
+@@:     xor     ch,ds:[bx]      ; "EOR" with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -307,7 +302,6 @@ EOR_E   endp
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-EOR_F (5)
 EOR_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
 
         mov     ah,5            ; Set instruction cycle time
@@ -321,8 +315,7 @@ EOR_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         inc     bh              ; Increment page number
         inc     ah              ; Add one cycle for boundary crossing
 
-@@:
-        xor     ch,ds:[bx]      ; "EOR" with data at specified location
+@@:     xor     ch,ds:[bx]      ; "EOR" with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -373,8 +366,7 @@ ORA_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        or      ch,ds:[bx]      ; "ORA" with data at specified location
+@@:     or      ch,ds:[bx]      ; "ORA" with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -393,8 +385,7 @@ ORA_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        or      ch,ds:[bx]      ; "ORA" with data at specified location
+@@:     or      ch,ds:[bx]      ; "ORA" with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -471,8 +462,7 @@ ORA_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         inc     bh              ; Increment page number
         inc     ah              ; Add one cycle for boundary crossing
 
-@@:
-        or      ch,ds:[bx]      ; "ORA" with data at specified location
+@@:     or      ch,ds:[bx]      ; "ORA" with data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 

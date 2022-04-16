@@ -80,8 +80,7 @@ ADC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     al,ds:[bx]      ; AL = data at specified location
+@@:     mov     al,ds:[bx]      ; AL = data at specified location
         mov     bl,cl
         and     bx,D_6502
         jmp     AddProc[bx]
@@ -101,8 +100,7 @@ ADC_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     al,ds:[bx]      ; AL = data at specified location
+@@:     mov     al,ds:[bx]      ; AL = data at specified location
         mov     bl,cl
         and     bx,D_6502
         jmp     AddProc[bx]
@@ -187,8 +185,7 @@ ADC_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         inc     bh              ; Increment page number
         inc     ah              ; Add one cycle for boundary crossing
 
-@@:
-        mov     al,ds:[bx]      ; AL = data at specified location
+@@:     mov     al,ds:[bx]      ; AL = data at specified location
         mov     bl,cl
         and     bx,D_6502
         jmp     AddProc[bx]
@@ -354,7 +351,6 @@ SBC_2   endp
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-SBC_4 (4)
 SBC_4   proc    near            ;______/ Mode 4: absolute addressing \_______
 
         mov     ah,4            ; Set instruction cycle time
@@ -369,7 +365,6 @@ SBC_4   endp
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-SBC_5 (4)
 SBC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
 
         mov     ah,4            ; Set instruction cycle time
@@ -381,8 +376,7 @@ SBC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     al,ds:[bx]      ; AL = data at specified location
+@@:     mov     al,ds:[bx]      ; AL = data at specified location
         mov     bl,cl
         and     bx,D_6502
         jmp     SubProc[bx]
@@ -402,8 +396,7 @@ SBC_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     al,ds:[bx]      ; AL = data at specified location
+@@:     mov     al,ds:[bx]      ; AL = data at specified location
         mov     bl,cl
         and     bx,D_6502
         jmp     SubProc[bx]
@@ -488,8 +481,7 @@ SBC_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         inc     bh              ; Increment page number
         inc     ah              ; Add one cycle for boundary crossing
 
-@@:
-        mov     al,ds:[bx]      ; AL = data at specified location
+@@:     mov     al,ds:[bx]      ; AL = data at specified location
         mov     bl,cl
         and     bx,D_6502
         jmp     SubProc[bx]

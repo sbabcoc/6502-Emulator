@@ -68,8 +68,7 @@ ASL_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        sal     ds:[bx],1       ; Shift specified location left one bit
+@@:     sal     ds:[bx],1       ; Shift specified location left one bit
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZC         ; Merge flags to complete the cycle
 
@@ -146,8 +145,7 @@ LSR_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        shr     ds:[bx],1       ; Shift specified location right one bit
+@@:     shr     ds:[bx],1       ; Shift specified location right one bit
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZC         ; Merge flags to complete the cycle
 
@@ -228,8 +226,7 @@ ROL_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        ror     cl,1            ; Move 6502 Carry into 8086 Carry
+@@:     ror     cl,1            ; Move 6502 Carry into 8086 Carry
         rol     cl,1            ; Restore processor status
         rcl     ds:[bx],1       ; Roll specified location left one bit
         mov     bl,ah           ; BL = instruction cycle time
@@ -316,8 +313,7 @@ ROR_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        ror     cl,1            ; Move 6502 Carry into 8086 Carry
+@@:     ror     cl,1            ; Move 6502 Carry into 8086 Carry
         rol     cl,1            ; Restore processor status
         rcr     ds:[bx],1       ; Roll specified location right one bit
         mov     bl,ah           ; BL = instruction cycle time

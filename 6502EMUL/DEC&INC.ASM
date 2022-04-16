@@ -85,8 +85,7 @@ DEC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        dec     ds:[bx]         ; Decrement data at specified location
+@@:     dec     ds:[bx]         ; Decrement data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 
@@ -199,7 +198,6 @@ INC_4   endp
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-INC_5 (4)
 INC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
 
         mov     ah,4            ; Set instruction cycle time
@@ -211,8 +209,7 @@ INC_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        inc     ds:[bx]         ; Increment data at specified location
+@@:     inc     ds:[bx]         ; Increment data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         jmp     FlagSZ          ; Merge flags to complete the cycle
 

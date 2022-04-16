@@ -79,8 +79,7 @@ LDA_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     ch,ds:[bx]      ; Load data at specified location
+@@:     mov     ch,ds:[bx]      ; Load data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         test    ch,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete cycle
@@ -100,8 +99,7 @@ LDA_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     ch,ds:[bx]      ; Load data at specified location
+@@:     mov     ch,ds:[bx]      ; Load data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         test    ch,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete cycle
@@ -182,8 +180,7 @@ LDA_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         inc     bh              ; Increment page number
         inc     ah              ; Add one cycle for boundary crossing
 
-@@:
-        mov     ch,ds:[bx]      ; Load data at specified location
+@@:     mov     ch,ds:[bx]      ; Load data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         test    ch,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete cycle
@@ -237,8 +234,7 @@ LDX_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     dh,ds:[bx]      ; Load data at specified location
+@@:     mov     dh,ds:[bx]      ; Load data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         test    dh,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete cycle
@@ -321,8 +317,7 @@ LDY_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     dl,ds:[bx]      ; Load data at specified location
+@@:     mov     dl,ds:[bx]      ; Load data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         test    dl,-1           ; Set Sign and Zero flags
         jmp     FlagSZ          ; Merge flags to complete cycle
@@ -382,7 +377,6 @@ STA_4   endp
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-STA_5 (5)
 STA_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
 
         mov     ah,5            ; Set instruction cycle time
@@ -394,8 +388,7 @@ STA_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     ds:[bx],ch      ; Store data at specified location
+@@:     mov     ds:[bx],ch      ; Store data at specified location
 
         mov     bl,ah           ; BL = instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
@@ -415,8 +408,7 @@ STA_6   proc    near            ;____/ Mode 6: absolute indexed with Y \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     ds:[bx],ch      ; Store data at specified location
+@@:     mov     ds:[bx],ch      ; Store data at specified location
 
         mov     bl,ah           ; BL = instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
@@ -497,8 +489,7 @@ STA_F   proc    near            ;_____/ Mode F: post-indexed indirect \______
         inc     bh              ; Increment page number
         inc     ah              ; Add one cycle for boundary crossing
 
-@@:
-        mov     ds:[bx],ch      ; Store data at specified location
+@@:     mov     ds:[bx],ch      ; Store data at specified location
 
         mov     bl,ah           ; BL = instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode
@@ -631,7 +622,6 @@ STZ_4   endp
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-STZ_5 (2)
 STZ_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
 
         mov     ah,2            ; Set instruction cycle time
@@ -643,8 +633,7 @@ STZ_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     .B ds:[bx],0    ; Store zero at specified location
+@@:     mov     .B ds:[bx],0    ; Store zero at specified location
 
         mov     bl,ah           ; BL = instruction cycle time
         jmp     Fetch6502Opcode ; Procede to the next opcode

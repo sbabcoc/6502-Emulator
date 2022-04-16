@@ -98,8 +98,7 @@ BIT_5   proc    near            ;____/ Mode 5: absolute indexed with X \_____
         inc     bh              ; Increment page number
         inc     ah              ; Add one clock cycle for boundary crossing
 
-@@:
-        mov     al,ds:[bx]      ; AL = data at specified location
+@@:     mov     al,ds:[bx]      ; AL = data at specified location
         mov     bl,ah           ; BL = instruction cycle time
         test    ch,al           ; Test memory bits with Accumulator
 
