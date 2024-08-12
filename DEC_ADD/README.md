@@ -1,1 +1,1 @@
-This folder contains the output of TEST_ADD
+This folder contains the output of **TEST_ADD**, which was a program I used to capture the results on decimal-mode addition with all possible 8-bit values. This process allowed me to implement the algorithm in `ADC_Dec` to produce the same result values and flag states as an actual **6502** processor when provided the same input values.
